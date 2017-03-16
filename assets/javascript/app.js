@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var $tagInput = $('#tag-input');
 	var $addBtn = $('#add-tag-btn');
 	var $tagBtn = $('.tag-btn');
-
+	var $gifDisplay = $('#gif-display');
 	var APIKey = 'dc6zaTOxFJmzC';
 
 	
@@ -25,8 +25,9 @@ $(document).ready(function(){
 			url: queryURL
 			
 		}).done(function(Response){
-			var gifs = Response.data;
-			console.log(gifs);
+			var gifsArray = Response.data;
+			$gifDisplay.empty();
+			gifsArray.forEach(addGif);
 		})
 	});
 
@@ -36,6 +37,35 @@ $(document).ready(function(){
 			$tagInput.val('');
 		}
 	})
+
+	$('#gif-display').delegate('img', 'click', function() {
+
+		var gifState = $(this).attr('data-state');
+
+		if(gifState === 'still'){
+			$(this).attr('src',$(this).attr('data-animatedURL'));
+			$(this).attr('data-state','animated')
+		}
+		else{
+			$(this).attr('src', $(this).attr('data-stillURL'));
+			$(this).attr('data-state','still');
+		}
+	})
+
+	function addGif(gifObject){
+		var $gifDiv= $('<div>');
+		//var $rating = $('<p>').text(gifObject.rating);
+		var stillImg = gifObject.images.fixed_height_still;
+		var movingImg = gifObject.images.fixed_height;
+		var $gifImg = $('<img>').attr('src', stillImg.url).attr('data-rating',gifObject.rating);
+		$gifImg.attr('data-stillURL', stillImg.url).attr('data-animatedURL', movingImg.url).attr('data-state','still');
+		$gifDiv.append($gifImg);
+		//$gifDiv.attr('width', stillImg.width);
+		$gifDisplay.append($gifDiv);
+	}
+
+
+
 
 
 
