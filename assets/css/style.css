@@ -5,12 +5,12 @@ body{
 	background: rgba(200,184,191,0.7);
 }
 
+strong{
+	font-size: 22px;
+}
 
 button{
 	font-family: 'Baloo Bhaina', cursive;
-	
-	
-	
 }
 
 #tag-list{
@@ -35,10 +35,12 @@ button{
 
 .tag-btn:hover{
 	background-color: rgb(101,123,77);
+	cursor: pointer;
 }
 
-.tag-btn:hover{
-	cursor: pointer;
+.tag-btn:active{
+	background-color: rgb(164, 199, 125);
+	
 }
 
 .gif-div{
@@ -60,6 +62,10 @@ button{
 
 }
 
+.gif-div > p{
+	font-size: 1.5em;
+}
+
 #user-input{
 	background-color: white;
 	padding: 2em;
@@ -67,7 +73,27 @@ button{
 
 }
 
+#user-input button{
+	background-color: rgb(173,200,144);
+	box-shadow: 0 10px #435233;
+}
 
+#user-input button:hover{
+	background-color: #97D158;
+
+
+}
+
+#user-input button:active{
+	background-color: #657B4D;
+	box-shadow: 0 5px #313B25;
+	color: white;
+	transform: translateY(5px);
+}
+
+button:focus {
+	outline: 0;
+}
 
 img{
 	max-width: 100%;
@@ -88,9 +114,18 @@ p{
 	margin-bottom: 20px;
 }
 
-#add-tag-btn{
 
+@media only screen and (max-width: 991px) {
+
+	#user-input button{
+		width: 100%;
+		font-size: 1.8em
+	}
+	
 }
+
+
+
 
 
 

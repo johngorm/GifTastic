@@ -58,15 +58,19 @@ $(document).ready(function(){
 		var stillImg = gifObject.images.fixed_height_still;
 		var movingImg = gifObject.images.fixed_height;
 		var $gifImg = $('<img>').attr('src', stillImg.url)
-		$gifImg.attr('data-stillURL', stillImg.url).attr('data-animatedURL', movingImg.url).attr('data-state','still').addClass('img-responsive');
-		$gifDiv.append($rating).append($gifImg).addClass('gif-div');
+		$gifImg.attr('data-stillURL', stillImg.url).attr('data-animatedURL', 
+			movingImg.url).attr('data-state','still').addClass('img-responsive');
+		$gifDiv.append($rating)
+			.append($gifImg)
+			.addClass('gif-div');
 		$gifDisplay.append($gifDiv);
 	}
 
 
 	function addTag(element){
 		var $button = $('<button class="tag-btn">');
-		$button.html(element).val(element);
+		$button.html(element)
+			.val(element);
 		$tagDiv.append($button);
 	};
 
