@@ -71,6 +71,8 @@ button{
 	background-color: white;
 	padding: 2em;
 	border-radius: 30px 30px;
+	float:right;
+	margin-right: 15px;
 
 }
 
@@ -122,12 +124,19 @@ p{
 
 @media only screen and (max-width: 991px) {
 
+	#user-input{
+		margin:initial;
+	}
 	#user-input button{
 		width: 100%;
 		font-size: 1.8em
 	}
+
+	#user-input input{
+		width: 100%;
+	}
 	
-}
+};
 
 
 
