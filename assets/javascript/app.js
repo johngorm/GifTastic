@@ -1,5 +1,5 @@
-var topics = ['coding', 'guitar', 'musical theater', 'video games', 'anime','star trek', 
-	'salsa','game of thrones','disney', 'the simpsons','joe biden'];
+var topics = ['Programing', 'Rock Guitar', 'Musical Theater', 'Video Games', 'Anime','Star Trek', 
+	'salsa','Game of Thrones','Disney', 'The Simpsons','Joe Biden'];
 
 $(document).ready(function(){
 	var $tagDiv = $('#tag-list');
@@ -54,20 +54,14 @@ $(document).ready(function(){
 
 	function addGif(gifObject){
 		var $gifDiv= $('<div>');
-		//var $rating = $('<p>').text(gifObject.rating);
+		var $rating = $('<p>').text('Rating: '+ gifObject.rating.toUpperCase());
 		var stillImg = gifObject.images.fixed_height_still;
 		var movingImg = gifObject.images.fixed_height;
-		var $gifImg = $('<img>').attr('src', stillImg.url).attr('data-rating',gifObject.rating);
-		$gifImg.attr('data-stillURL', stillImg.url).attr('data-animatedURL', movingImg.url).attr('data-state','still');
-		$gifDiv.append($gifImg);
-		//$gifDiv.attr('width', stillImg.width);
+		var $gifImg = $('<img>').attr('src', stillImg.url)
+		$gifImg.attr('data-stillURL', stillImg.url).attr('data-animatedURL', movingImg.url).attr('data-state','still').addClass('img-responsive');
+		$gifDiv.append($rating).append($gifImg).addClass('gif-div');
 		$gifDisplay.append($gifDiv);
 	}
-
-
-
-
-
 
 
 	function addTag(element){
