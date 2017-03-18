@@ -58,6 +58,7 @@ button{
 	border-color: #D1B7C3;
 	border-width: 3px;
 	box-sizing: border-box;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 10px 30px;
 
 }
@@ -71,6 +72,10 @@ button{
 	padding: 2em;
 	border-radius: 30px 30px;
 
+}
+
+#user-input > p{
+	font-size: 1.3em;
 }
 
 #user-input button{
