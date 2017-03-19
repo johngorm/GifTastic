@@ -13,6 +13,10 @@ button{
 	font-family: 'Baloo Bhaina', cursive;
 }
 
+#gif-display{
+	clear:left;
+}
+
 #tag-list{
 	padding-bottom: 5px;
 	margin-bottom: 20px;
@@ -81,25 +85,42 @@ button{
 }
 
 #user-input button{
+	width: 5em;
+
+}
+
+
+#add-tag-btn {
 	background-color: rgb(173,200,144);
 	box-shadow: 0 10px #435233;
 }
 
-#user-input button:hover{
+#add-tag-btn:hover{
 	background-color: #97D158;
-
 
 }
 
-#user-input button:active{
+#add-tag-btn:active{
 	background-color: #657B4D;
 	box-shadow: 0 5px #313B25;
 	color: white;
 	transform: translateY(5px);
 }
 
-button:focus {
-	outline: 0;
+#reset-Local-btn{
+	box-shadow: 0 10px #751C1A;
+	background-color: rgb(212,51,47);
+}
+
+#reset-Local-btn:hover{
+	background-color: #FC3534;
+}
+
+#reset-Local-btn:active{
+	background-color: #AB2925;
+	box-shadow: 0 5px #631816;
+	color:white;
+	transform: translateY(5px);
 }
 
 img{
@@ -129,7 +150,9 @@ p{
 	}
 	#user-input button{
 		width: 100%;
-		font-size: 1.8em
+		height: 3em;
+		font-size: 150%;
+		margin: 10px 0px;
 	}
 
 	#user-input input{
