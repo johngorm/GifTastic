@@ -9,8 +9,23 @@ $(document).ready(function(){
 	var $gifDisplay = $('#gif-display');
 	var APIKey = 'dc6zaTOxFJmzC';
 
+	var userTagObjArray;
+
 	
 	populateTagField(topics);
+	if(localStorage.getItem('user-tag')){
+		userTagObjArray= JSON.parse(localStorage.getItem('user-tag'));
+		for(var jj = 0; jj < userTagObjArray.length; jj++){
+			 // var localTag = JSON.parse(localStorage.getItem('user-tag'));
+			 // localTag.forEach(addTag);
+			 addTag(userTagObjArray[jj].name)
+		}
+	}
+	else{
+		userTagObjArray = []
+	}
+ 
+
 
 	$('#tag-list').delegate('.tag-btn', 'click', function(){
 		//var pattern = new RegExp( ** pattern variable)
@@ -33,7 +48,10 @@ $(document).ready(function(){
 
 	$addBtn.on('click', function(){
 		if($tagInput.val()){
-			addTag($tagInput.val());
+			addTag($tagInput.val());	
+			var gifTagObject = {name: $tagInput.val()};
+			userTagObjArray.push(gifTagObject);
+			localStorage.setItem('user-tag',JSON.stringify(userTagObjArray));
 			$tagInput.val('');
 		}
 	})
@@ -76,7 +94,7 @@ $(document).ready(function(){
 
 	function populateTagField (tagArray){
 		tagArray.forEach(addTag);
-	}
+	};
 	
 
 	
