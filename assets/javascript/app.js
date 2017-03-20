@@ -1,51 +1,32 @@
-var topics = ['Programing', 'Rock Guitar', 'Musical Theater', 'Video Games', 'Anime','Star Trek', 
-	'salsa','Game of Thrones','Disney', 'The Simpsons','Joe Biden'];
+var topics = ['Programing', 'Rock Guitar', 'Sondheim', 'Super Smash Bros', 'Anime','Star Trek', 
+	'Panic','Game of Thrones','Walt Disney World', 'The Simpsons','Joe Biden', 'Patton Oswalt', 'Wil Wheaton', 
+	'Rage','Steven Universe', 'Arrested Development','Board Games', 'Piderman', 'Westworld'];
 
 $(document).ready(function(){
 	var $tagDiv = $('#tag-list');
 	var $tagInput = $('#tag-input');
 	var $addBtn = $('#add-tag-btn');
+	var $resetBtn = $('#reset-Local-btn');
 	var $tagBtn = $('.tag-btn');
 	var $gifDisplay = $('#gif-display');
 	var APIKey = 'dc6zaTOxFJmzC';
 
-	var userTagObjArray;
+	//Array to hold localStorage user tag objects
+	var userTagObjArray = [];
 
-	
 	populateTagField(topics);
-	if(localStorage.getItem('user-tag')){
+
+	//If the user has tags in local memory, add them to the the gif tag list
+	if(localStorage.getItem('user-tag')){	
+		//Parse localStorage to get the gif tag objects
 		userTagObjArray= JSON.parse(localStorage.getItem('user-tag'));
 		for(var jj = 0; jj < userTagObjArray.length; jj++){
-			 // var localTag = JSON.parse(localStorage.getItem('user-tag'));
-			 // localTag.forEach(addTag);
 			 addTag(userTagObjArray[jj].name)
 		}
 	}
-	else{
-		userTagObjArray = []
-	}
- 
-
-
-	$('#tag-list').delegate('.tag-btn', 'click', function(){
-		//var pattern = new RegExp( ** pattern variable)
-		var pattern = new RegExp('\\s','g');
-		var searchTag = $(this).val();
-		searchTag = searchTag.replace(pattern, '+');
-		console.log(searchTag);
-		var queryURL = "http://api.giphy.com/v1/gifs/search?q="+searchTag+'&api_key=' + APIKey + '&limit=10';
-
-		$.ajax({
-			method: 'GET',
-			url: queryURL
-			
-		}).done(function(Response){
-			var gifsArray = Response.data;
-			$gifDisplay.empty();
-			gifsArray.forEach(addGif);
-		})
-	});
-
+	
+	//Take user input and create gif tag, put tag name into localStorage
+	//as a stringified version of the tag object
 	$addBtn.on('click', function(){
 		if($tagInput.val()){
 			addTag($tagInput.val());	
@@ -54,8 +35,15 @@ $(document).ready(function(){
 			localStorage.setItem('user-tag',JSON.stringify(userTagObjArray));
 			$tagInput.val('');
 		}
+	});
+	//Clear storage and reload page to clear user-added tags
+	$resetBtn.on('click', function() {
+		localStorage.clear();
+		location.reload();
 	})
 
+	//If a gif image is clicked, change the source to either the full url or the static url 
+	//based on the current gif state
 	$('#gif-display').delegate('img', 'click', function() {
 
 		var gifState = $(this).attr('data-state');
@@ -68,8 +56,31 @@ $(document).ready(function(){
 			$(this).attr('src', $(this).attr('data-stillURL'));
 			$(this).attr('data-state','still');
 		}
-	})
+	});
 
+	//Clicking a tag button makes a AJAX call to Giphy API to get 10 gifs 
+	//that have the tag
+	$('#tag-list').delegate('.tag-btn', 'click', function(){
+		//Replace the spaces in tag with '+' in accordance with Giphy API requiremnts
+		var pattern = new RegExp('\\s','g');
+		var searchTag = $(this).val();
+		searchTag = searchTag.replace(pattern, '+');
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchTag + 
+		'&api_key=' + APIKey + '&limit=10';
+
+		$.ajax({
+			method: 'GET',
+			url: queryURL
+			
+		}).done(function(Response){
+			var gifsArray = Response.data;
+			$gifDisplay.empty();
+			gifsArray.forEach(addGif);
+		})
+	});
+
+	//Create a div to hold the gif and its rating, set all attributes,
+	//and append to the DOM
 	function addGif(gifObject){
 		var $gifDiv= $('<div>');
 		var $rating = $('<p>').text('Rating: '+ gifObject.rating.toUpperCase());
@@ -82,9 +93,9 @@ $(document).ready(function(){
 			.append($gifImg)
 			.addClass('gif-div');
 		$gifDisplay.append($gifDiv);
-	}
+	};
 
-
+	//
 	function addTag(element){
 		var $button = $('<button class="tag-btn">');
 		$button.html(element)
@@ -92,6 +103,7 @@ $(document).ready(function(){
 		$tagDiv.append($button);
 	};
 
+	//Function to add tags that takes an array as input
 	function populateTagField (tagArray){
 		tagArray.forEach(addTag);
 	};
