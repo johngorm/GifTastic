@@ -70,7 +70,7 @@ $(document).ready(function(){
 		var pattern = new RegExp('\\s','g');
 		var searchTag = $(this).val();
 		searchTag = searchTag.replace(pattern, '+');
-		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchTag + 
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTag + 
 		'&api_key=' + APIKey + '&limit=10';
 
 		$.ajax({
