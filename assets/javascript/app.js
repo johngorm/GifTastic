@@ -2,6 +2,11 @@ var topics = ['Programing', 'Rock Guitar', 'Sondheim', 'Super Smash Bros', 'Anim
 	'Panic','Game of Thrones','Walt Disney World', 'The Simpsons','Joe Biden', 'Patton Oswalt', 'Wil Wheaton', 
 	'Rage','Steven Universe', 'Arrested Development','Board Games', 'Piderman', 'Westworld'];
 
+function userGifTag(name){
+	this.name = name;
+};
+
+
 $(document).ready(function(){
 	var $tagDiv = $('#tag-list');
 	var $tagInput = $('#tag-input');
@@ -30,7 +35,7 @@ $(document).ready(function(){
 	$addBtn.on('click', function(){
 		if($tagInput.val()){
 			addTag($tagInput.val());	
-			var gifTagObject = {name: $tagInput.val()};
+			var gifTagObject = new userGifTag($tagInput.val());
 			userTagObjArray.push(gifTagObject);
 			localStorage.setItem('user-tag',JSON.stringify(userTagObjArray));
 			$tagInput.val('');
